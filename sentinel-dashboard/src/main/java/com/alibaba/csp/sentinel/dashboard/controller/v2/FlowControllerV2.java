@@ -217,11 +217,8 @@ public class FlowControllerV2 {
 		return ruleProvider.getRules(MachineEntity.builder().app(app).build());
 	}
 
-	private void publishRules(String app) {
+	private void publishRules(String app) throws Exception {
 		List<FlowRuleEntity> rules = repository.findAllByApp(app);
 		rulePublisher.publish(MachineEntity.builder().app(app).build(), rules);
-		} catch (Exception e) {
-			logger.error("Publish flow rules failed after rule delete", e);
-		}
 	}
 }
